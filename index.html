@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux File Commands Guide</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <img src=Tux.png alt="Linux Logo" class="logo">
+                <h1>Linux File & Directory Commands</h1>
+                <p>Essential commands for file system navigation and manipulation</p>
+            </div>
+        </header>
+
+        <!-- Add navigation bar back -->
+        <nav class="command-nav">
+            <div class="nav-container">
+                <ul class="nav-list">
+                    <li><a href="#intro-section" class="nav-intro"><i class="fas fa-book"></i> Intro</a></li>
+                    <li><a href="#ls-command"><i class="fas fa-list"></i> ls</a></li>
+                    <li><a href="#cd-command"><i class="fas fa-folder-open"></i> cd</a></li>
+                    <li><a href="#pwd-command"><i class="fas fa-map-marker-alt"></i> pwd</a></li>
+                    <li><a href="#mkdir-command"><i class="fas fa-folder-plus"></i> mkdir</a></li>
+                    <li><a href="#rm-command"><i class="fas fa-trash-alt"></i> rm/rmdir</a></li>
+                    <li><a href="#cp-command"><i class="fas fa-copy"></i> cp</a></li>
+                    <li><a href="#mv-command"><i class="fas fa-cut"></i> mv</a></li>
+                    <li><a href="#cat-command"><i class="fas fa-file-alt"></i> cat</a></li>
+                    <li><a href="#touch-command"><i class="fas fa-file-medical"></i> touch</a></li>
+                    <li><a href="#grep-command"><i class="fas fa-search"></i> grep</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="intro-section" id="intro-section">
+            <div class="intro-content">
+                <div class="intro-flex">
+                    <div class="intro-text">
+                        <h2>Understanding Linux Commands</h2>
+                        <p>Linux commands are text-based instructions used to interact with the operating system. They provide powerful tools for file manipulation, system administration, and process management. The commands listed below focus on essential file and directory operations that every Linux user should know. Each command comes with various options (flags) that modify its behavior to suit specific needs.</p>
+                        <div class="intro-tips">
+                            <p><i class="fas fa-lightbulb"></i> <strong>Pro Tip:</strong> Most commands support the <code>--help</code> flag or <code>man</code> command for detailed documentation.</p>
+                        </div>
+                    </div>
+                    <div class="intro-image">
+                        <img src="linux.png" alt="Linux Penguin" class="linux-mascot">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main>
+            <section class="commands-grid">
+                <!-- ls command -->
+                <div class="command-card" id="ls-command">
+                    <div class="command-basic">
+                        <div class="command-icon">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <h2>ls</h2>
+                        <p class="command-brief">List directory contents</p>
+                        <div class="basic-syntax">
+                            <code>ls [options] [directory]</code>
+                        </div>
+                    </div>
+                    <div class="command-details">
+                        <div class="command-purpose">
+                            <h3>Purpose</h3>
+                            <p>The ls command is used to list files and directories in Linux. It's one of the most frequently used commands that helps you:</p>
+                            <ul>
+                                <li>View directory contents</li>
+                                <li>Check file permissions and ownership</li>
+                                <li>See file sizes and modification times</li>
+                                <li>Identify file types through colors</li>
+                            </ul>
+                        </div>
+
+                        <div class="command-usage">
+                            <h3>Common Usage</h3>
+                            <ul>
+                                <li><code>ls -l</code>: Long listing format
+                                    <div class="usage-example">
+                                        <img src="images/ls-l-example.png" alt="ls -l command output">
+                                        <p>Shows detailed information including permissions, owner, size, and modification time</p>
+                                    </div>
+                                </li>
+                                <li><code>ls -a</code>: Show hidden files
+                                    <div class="usage-example">
+                                        <img src="images/ls-a-example.png" alt="ls -a command output">
+                                        <p>Displays all files, including those starting with a dot (.)</p>
+                                    </div>
+                                </li>
+                                <li><code>ls -h</code>: Human readable sizes</li>
+                                <li><code>ls -R</code>: Recursive listing</li>
+                            </ul>
+                        </div>
+
+                        <div class="practical-examples">
+                            <h3>Practical Examples</h3>
+                            <div class="example-block">
+                                <h4>1. List all files with details:</h4>
+                                <code>ls -lah</code>
+                                <div class="example-output">
+                                    <pre>
+total 128K
+drwxr-xr-x  2 user user 4.0K Sep 15 14:30 .
+drwxr-xr-x 15 user user 4.0K Sep 15 14:28 ..
+-rw-r--r--  1 user user  12K Sep 15 14:30 document.pdf
+-rw-r--r--  1 user user 8.2K Sep 15 14:29 image.jpg
+                                    </pre>
+                                </div>
+                            </div>
+
+                            <div class="example-block">
+                                <h4>2. Sort files by size:</h4>
+                                <code>ls -lS</code>
+                                <p>Lists files in descending order of size</p>
+                            </div>
+                        </div>
+
+                        <div class="command-notes">
+                            <h3>Important Notes</h3>
+                            <ul>
+                                <li>Color coding helps identify file types:
+                                    <ul>
+                                        <li class="file-blue">Blue: Directories</li>
+                                        <li class="file-green">Green: Executable files</li>
+                                        <li class="file-red">Red: Compressed archives</li>
+                                        <li class="file-cyan">Cyan: Symbolic links</li>
+                                    </ul>
+                                </li>
+                                <li>Use with grep to filter results: <code>ls -l | grep ".txt"</code></li>
+                                <li>Combine with other commands using pipes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- cd command -->
+                <div class="command-card" id="cd-command">
+                    <div class="command-basic">
+                        <div class="command-icon">
+                            <i class="fas fa-folder-open"></i>
+                        </div>
+                        <h2>cd</h2>
+                        <p class="command-brief">Change Directory</p>
+                        <div class="basic-syntax">
+                            <code>cd [directory]</code>
+                        </div>
+                    </div>
+                    <div class="command-details">
+                        <div class="command-purpose">
+                            <h3>Purpose</h3>
+                            <p>The cd (Change Directory) command is used to navigate the file system. It helps you:</p>
+                            <ul>
+                                <li>Move between directories</li>
+                                <li>Access different locations quickly</li>
+                                <li>Navigate relative and absolute paths</li>
+                                <li>Return to previous locations</li>
+                            </ul>
+                        </div>
+
+                        <div class="command-usage">
+                            <h3>Common Usage</h3>
+                            <ul>
+                                <li><code>cd ..</code>: Go up one directory
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ pwd
+/home/user/documents
+$ cd ..
+$ pwd
+/home/user
+                                            </pre>
+                                        </div>
+                                        <p>Moves to the parent directory</p>
+                                    </div>
+                                </li>
+                                <li><code>cd ~</code>: Go to home directory
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ cd ~
+$ pwd
+/home/user
+                                            </pre>
+                                        </div>
+                                        <p>Returns to user's home directory</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="practical-examples">
+                            <h3>Practical Examples</h3>
+                            <div class="example-block">
+                                <h4>1. Navigate to specific directory:</h4>
+                                <code>cd /var/www/html</code>
+                                <div class="example-output">
+                                    <pre>
+$ cd /var/www/html
+$ pwd
+/var/www/html
+                                    </pre>
+                                </div>
+                            </div>
+
+                            <div class="example-block">
+                                <h4>2. Return to previous directory:</h4>
+                                <code>cd -</code>
+                                <div class="example-output">
+                                    <pre>
+$ pwd
+/var/www/html
+$ cd -
+/home/user
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="command-notes">
+                            <h3>Important Notes</h3>
+                            <ul>
+                                <li>Directory shortcuts:
+                                    <ul>
+                                        <li><code>.</code> - Current directory</li>
+                                        <li><code>..</code> - Parent directory</li>
+                                        <li><code>~</code> - Home directory</li>
+                                        <li><code>-</code> - Previous directory</li>
+                                    </ul>
+                                </li>
+                                <li>Best practices:
+                                    <ul>
+                                        <li>Use Tab for auto-completion</li>
+                                        <li>Use absolute paths for scripts</li>
+                                        <li>Check pwd after changing directories</li>
+                                        <li>Use relative paths for nearby locations</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- pwd command -->
+                <div class="command-card" id="pwd-command">
+                    <div class="command-basic">
+                        <div class="command-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h2>pwd</h2>
+                        <p class="command-brief">Print Working Directory</p>
+                        <div class="basic-syntax">
+                            <code>pwd [options]</code>
+                        </div>
+                    </div>
+                    <div class="command-details">
+                        <div class="command-purpose">
+                            <h3>Purpose</h3>
+                            <p>The pwd (Print Working Directory) command displays your current location in thefilesystem. It helps you:</p>
+                            <ul>
+                                <li>Verify your current directory location</li>
+                                <li>Get absolute path for scripts</li>
+                                <li>Debug path-related issues</li>
+                                <li>Navigate complex directory structures</li>
+                            </ul>
+                        </div>
+
+                        <div class="command-usage">
+                            <h3>Common Usage</h3>
+                            <ul>
+                                <li><code>pwd -P</code>: Show physical path
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ ln -s /var/www/html webroot
+$ cd webroot
+$ pwd -P
+/var/www/html
+                                            </pre>
+                                        </div>
+                                        <p>Shows actual path instead of symbolic link path</p>
+                                    </div>
+                                </li>
+                                <li><code>pwd -L</code>: Show logical path
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ pwd -L
+/home/user/webroot
+                                            </pre>
+                                        </div>
+                                        <p>Shows path with symbolic links preserved</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="practical-examples">
+                            <h3>Practical Examples</h3>
+                            <div class="example-block">
+                                <h4>1. Use in shell scripts:</h4>
+                                <code>CURRENT_DIR=$(pwd)</code>
+                                <div class="example-output">
+                                    <pre>
+#!/bin/bash
+CURRENT_DIR=$(pwd)
+echo "Working from: $CURRENT_DIR"
+cd /tmp
+# Do some work
+cd "$CURRENT_DIR"  # Return to original directory
+                                    </pre>
+                                </div>
+                            </div>
+
+                            <div class="example-block">
+                                <h4>2. Combine with other commands:</h4>
+                                <code>echo "Current location: $(pwd)"</code>
+                                <div class="example-output">
+                                    <pre>
+$ echo "Current location: $(pwd)"
+Current location: /home/user/projects
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="command-notes">
+                            <h3>Important Notes</h3>
+                            <ul>
+                                <li>Path information:
+                                    <ul>
+                                        <li>Always shows absolute path from root (/)</li>
+                                        <li>Built into shell for efficiency</li>
+                                        <li>Essential for shell scripts</li>
+                                        <li>Handles special characters in paths</li>
+                                    </ul>
+                                </li>
+                                <li>Best practices:
+                                    <ul>
+                                        <li>Quote the output when using in scripts</li>
+                                        <li>Use -P when working with symlinks</li>
+                                        <li>Combine with cd to track directory changes</li>
+                                        <li>Store path in variable for later use</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- mkdir command -->
+                <div class="command-card" id="mkdir-command">
+                    <div class="command-basic">
+                        <div class="command-icon">
+                            <i class="fas fa-folder-plus"></i>
+                        </div>
+                        <h2>mkdir</h2>
+                        <p class="command-brief">Make Directory</p>
+                        <div class="basic-syntax">
+                            <code>mkdir [options] directory</code>
+                        </div>
+                    </div>
+                    <div class="command-details">
+                        <div class="command-purpose">
+                            <h3>Purpose</h3>
+                            <p>The mkdir command creates new directories in Linux. It helps you:</p>
+                            <ul>
+                                <li>Create single or multiple directories</li>
+                                <li>Set up directory structures</li>
+                                <li>Create parent directories automatically</li>
+                                <li>Set permissions during creation</li>
+                            </ul>
+                        </div>
+
+                        <div class="command-usage">
+                            <h3>Common Usage</h3>
+                            <ul>
+                                <li><code>mkdir -p</code>: Create parent directories
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ mkdir -p projects/website/css
+$ tree projects/
+projects/
+└── website/
+    └── css/
+                            </pre>
+                                        </div>
+                                        <p>Creates all necessary parent directories</p>
+                                    </div>
+                                </li>
+                                <li><code>mkdir -m</code>: Set directory permissions
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ mkdir -m 755 public_files
+$ ls -ld public_files
+drwxr-xr-x 2 user user 4096 Mar 15 10:30 public_files
+                            </pre>
+                                        </div>
+                                        <p>Creates directory with specific permissions</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="practical-examples">
+                            <h3>Practical Examples</h3>
+                            <div class="example-block">
+                                <h4>1. Create multiple directories:</h4>
+                                <code>mkdir docs images videos</code>
+                                <div class="example-output">
+                                    <pre>
+$ mkdir docs images videos
+$ ls -l
+drwxr-xr-x 2 user user 4096 Mar 15 10:31 docs
+drwxr-xr-x 2 user user 4096 Mar 15 10:31 images
+drwxr-xr-x 2 user user 4096 Mar 15 10:31 videos
+                                    </pre>
+                                </div>
+                            </div>
+
+                            <div class="example-block">
+                                <h4>2. Create project structure:</h4>
+                                <code>mkdir -p project/{src,docs,tests}</code>
+                                <div class="example-output">
+                                    <pre>
+$ mkdir -p project/{src,docs,tests}
+$ tree project/
+project/
+├── src/
+├── docs/
+└── tests/
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="command-notes">
+                            <h3>Important Notes</h3>
+                            <ul>
+                                <li>Directory creation:
+                                    <ul>
+                                        <li>Default permissions are modified by umask</li>
+                                        <li>Parent directories must exist or use -p</li>
+                                        <li>Directory names are case-sensitive</li>
+                                        <li>Cannot create directories with same name</li>
+                                    </ul>
+                                </li>
+                                <li>Best practices:
+                                    <ul>
+                                        <li>Use meaningful directory names</li>
+                                        <li>Avoid spaces in directory names</li>
+                                        <li>Consider permissions carefully</li>
+                                        <li>Use -p when creating nested structures</li>
+                                    </ul>
+                                </li>
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- rm/rmdir command -->
+                <div class="command-card" id="rm-command">
+                    <div class="command-basic">
+                        <div class="command-icon">
+                            <i class="fas fa-trash-alt"></i>
+                        </div>
+                        <h2>rm/rmdir</h2>
+                        <p class="command-brief">Remove files or directories</p>
+                        <div class="basic-syntax">
+                            <code>rm [options] file</code>
+                            <code>rmdir [options] directory</code>
+                        </div>
+                    </div>
+                    <div class="command-details">
+                        <div class="command-purpose">
+                            <h3>Purpose</h3>
+                            <p>The rm command removes files and directories permanently. It helps you:</p>
+                            <ul>
+                                <li>Delete unwanted files</li>
+                                <li>Remove empty directories</li>
+                                <li>Clean up filesystem space</li>
+                                <li>Delete directory trees</li>
+                            </ul>
+                        </div>
+
+                        <div class="command-usage">
+                            <h3>Common Usage</h3>
+                            <ul>
+                                <li><code>rm -r</code>: Remove recursively
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ rm -r old_project/
+$ ls -l
+total 0
+                                            </pre>
+                                        </div>
+                                        <p>Removes directory and all its contents</p>
+                                    </div>
+                                </li>
+                                <li><code>rm -i</code>: Interactive mode
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ rm -i important.txt
+rm: remove regular file 'important.txt'? y
+                                            </pre>
+                                        </div>
+                                        <p>Asks for confirmation before deletion</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="practical-examples">
+                            <h3>Practical Examples</h3>
+                            <div class="example-block">
+                                <h4>1. Remove multiple files:</h4>
+                                <code>rm file1.txt file2.txt file3.txt</code>
+                                <div class="example-output">
+                                    <pre>
+$ ls
+file1.txt file2.txt file3.txt
+$ rm file1.txt file2.txt file3.txt
+$ ls
+                                    </pre>
+                                </div>
+                            </div>
+
+                            <div class="example-block">
+                                <h4>2. Remove empty directory:</h4>
+                                <code>rmdir empty_dir/</code>
+                                <div class="example-output">
+                                    <pre>
+$ mkdir test_dir
+$ rmdir test_dir
+$ ls -l
+total 0
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="command-notes">
+                            <h3>Important Notes</h3>
+                            <ul>
+                                <li>Safety considerations:
+                                    <ul>
+                                        <li>⚠️ Deletion is permanent - no recycle bin</li>
+                                        <li>Use -i flag for interactive deletion</li>
+                                        <li>Be extremely careful with rm -rf</li>
+                                        <li>Double-check wildcards before executing</li>
+                                    </ul>
+                                </li>
+                                <li>Best practices:
+                                    <ul>
+                                        <li>Create backups before mass deletions</li>
+                                        <li>Use rm -i when learning</li>
+                                        <li>Consider using trash-cli instead</li>
+                                        <li>Never run rm -rf / or rm -rf /*</li>
+                                    </ul>
+                                </li>
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- cp command -->
+                <div class="command-card" id="cp-command">
+                    <div class="command-basic">
+                        <div class="command-icon">
+                            <i class="fas fa-copy"></i>
+                        </div>
+                        <h2>cp</h2>
+                        <p class="command-brief">Copy files and directories</p>
+                        <div class="basic-syntax">
+                            <code>cp [options] source destination</code>
+                        </div>
+                    </div>
+                    <div class="command-details">
+                        <div class="command-purpose">
+                            <h3>Purpose</h3>
+                            <p>The cp (copy) command creates copies of files and directories. It helps you:</p>
+                            <ul>
+                                <li>Create file backups</li>
+                                <li>Duplicate directory structures</li>
+                                <li>Share files between locations</li>
+                                <li>Preserve file attributes</li>
+                            </ul>
+                        </div>
+
+                        <div class="command-usage">
+                            <h3>Common Usage</h3>
+                            <ul>
+                                <li><code>cp -r</code>: Copy recursively
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ cp -r project/ backup/
+$ tree backup/
+backup/
+└── project/
+    ├── src/
+    ├── docs/
+    └── README.md
+                            </pre>
+                                        </div>
+                                        <p>Copies entire directory structure</p>
+                                    </div>
+                                </li>
+                                <li><code>cp -p</code>: Preserve attributes
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ cp -p script.sh backup/
+$ ls -l script.sh backup/script.sh
+-rwxr-xr-x 1 user user 1234 Mar 15 10:30 script.sh
+-rwxr-xr-x 1 user user 1234 Mar 15 10:30 backup/script.sh
+                            </pre>
+                                        </div>
+                                        <p>Maintains timestamps, permissions, and ownership</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="practical-examples">
+                            <h3>Practical Examples</h3>
+                            <div class="example-block">
+                                <h4>1. Create backup with timestamp:</h4>
+                                <code>cp config.ini config.ini.$(date +%Y%m%d)</code>
+                                <div class="example-output">
+                                    <pre>
+$ cp config.ini config.ini.20240315
+$ ls -l config.ini*
+-rw-r--r-- 1 user user 2048 Mar 15 10:30 config.ini
+-rw-r--r-- 1 user user 2048 Mar 15 10:30 config.ini.20240315
+                                    </pre>
+                                </div>
+                            </div>
+
+                            <div class="example-block">
+                                <h4>2. Copy multiple files:</h4>
+                                <code>cp -v *.txt backup/</code>
+                                <div class="example-output">
+                                    <pre>
+$ cp -v *.txt backup/
+'file1.txt' -> 'backup/file1.txt'
+'file2.txt' -> 'backup/file2.txt'
+'file3.txt' -> 'backup/file3.txt'
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="command-notes">
+                            <h3>Important Notes</h3>
+                            <ul>
+                                <li>Safety considerations:
+                                    <ul>
+                                        <li>Use -i to prevent overwriting files</li>
+                                        <li>Check destination space availability</li>
+                                        <li>Verify copy success with diff</li>
+                                        <li>Be careful with symbolic links</li>
+                                    </ul>
+                                </li>
+                                <li>Best practices:
+                                    <ul>
+                                        <li>Use -p to preserve attributes</li>
+                                        <li>Add -v for verbose output</li>
+                                        <li>Consider using rsync for large copies</li>
+                                        <li>Create dated backups of important files</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- mv command -->
+                <div class="command-card" id="mv-command">
+                    <div class="command-basic">
+                        <div class="command-icon">
+                            <i class="fas fa-cut"></i>
+                        </div>
+                        <h2>mv</h2>
+                        <p class="command-brief">Move or rename files</p>
+                        <div class="basic-syntax">
+                            <code>mv [options] source destination</code>
+                        </div>
+                    </div>
+                    <div class="command-details">
+                        <div class="command-purpose">
+                            <h3>Purpose</h3>
+                            <p>The mv (move) command moves or renames files and directories. It helps you:</p>
+                            <ul>
+                                <li>Rename files and directories</li>
+                                <li>Move files between locations</li>
+                                <li>Organize filesystem structure</li>
+                                <li>Backup files with new names</li>
+                            </ul>
+                        </div>
+
+                        <div class="command-usage">
+                            <h3>Common Usage</h3>
+                            <ul>
+                                <li><code>mv -i</code>: Interactive mode
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ mv -i important.txt ~/backup/
+mv: overwrite '/home/user/backup/important.txt'? y
+                                            </pre>
+                                        </div>
+                                        <p>Asks before overwriting existing files</p>
+                                    </div>
+                                </li>
+                                <li><code>mv -v</code>: Verbose output
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ mv -v *.txt docs/
+'file1.txt' -> 'docs/file1.txt'
+'file2.txt' -> 'docs/file2.txt'
+                                            </pre>
+                                        </div>
+                                        <p>Shows what is being moved</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="practical-examples">
+                            <h3>Practical Examples</h3>
+                            <div class="example-block">
+                                <h4>1. Rename a file:</h4>
+                                <code>mv oldname.txt newname.txt</code>
+                                <div class="example-output">
+                                    <pre>
+$ ls
+oldname.txt
+$ mv oldname.txt newname.txt
+$ ls
+newname.txt
+                                    </pre>
+                                </div>
+                            </div>
+
+                            <div class="example-block">
+                                <h4>2. Move multiple files:</h4>
+                                <code>mv file1.txt file2.txt directory/</code>
+                                <div class="example-output">
+                                    <pre>
+$ ls
+file1.txt file2.txt directory/
+$ mv file1.txt file2.txt directory/
+$ ls directory/
+file1.txt file2.txt
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="command-notes">
+                            <h3>Important Notes</h3>
+                            <ul>
+                                <li>Safety considerations:
+                                    <ul>
+                                        <li>Use -i to prevent accidental overwrites</li>
+                                        <li>Check destination space availability</li>
+                                        <li>Verify source and destination paths</li>
+                                        <li>Be careful with wildcards</li>
+                                    </ul>
+                                </li>
+                                <li>Best practices:
+                                    <ul>
+                                        <li>Use -v for visibility of operations</li>
+                                        <li>Keep meaningful file names</li>
+                                        <li>Check permissions before moving</li>
+                                        <li>Backup important files first</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- cat command -->
+                <div class="command-card" id="cat-command">
+                    <div class="command-basic">
+                        <div class="command-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h2>cat</h2>
+                        <p class="command-brief">Concatenate and display files</p>
+                        <div class="basic-syntax">
+                            <code>cat [options] [file...]</code>
+                        </div>
+                    </div>
+                    <div class="command-details">
+                        <div class="command-purpose">
+                            <h3>Purpose</h3>
+                            <p>The cat (concatenate) command displays and combines file contents. It helps you:</p>
+                            <ul>
+                                <li>View file contents quickly</li>
+                                <li>Combine multiple files</li>
+                                <li>Create new files from input</li>
+                                <li>Display line numbers</li>
+                            </ul>
+                        </div>
+
+                        <div class="command-usage">
+                            <h3>Common Usage</h3>
+                            <ul>
+                                <li><code>cat -n</code>: Number all lines
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ cat -n file.txt
+     1	First line
+     2	Second line
+     3	Third line
+                            </pre>
+                                        </div>
+                                        <p>Shows line numbers for all lines</p>
+                                    </div>
+                                </li>
+                                <li><code>cat -b</code>: Number non-blank lines
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ cat -b file.txt
+     1	First line
+
+     2	Third line
+                            </pre>
+                                        </div>
+                                        <p>Numbers only non-empty lines</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="practical-examples">
+                            <h3>Practical Examples</h3>
+                            <div class="example-block">
+                                <h4>1. Combine multiple files:</h4>
+                                <code>cat file1.txt file2.txt > combined.txt</code>
+                                <div class="example-output">
+                                    <pre>
+$ cat file1.txt
+Hello
+$ cat file2.txt
+World
+$ cat file1.txt file2.txt > combined.txt
+$ cat combined.txt
+Hello
+World
+                                    </pre>
+                                </div>
+                            </div>
+
+                            <div class="example-block">
+                                <h4>2. Create a new file:</h4>
+                                <code>cat > newfile.txt</code>
+                                <div class="example-output">
+                                    <pre>
+$ cat > newfile.txt
+Type your text here
+Press Ctrl+D when done
+$ cat newfile.txt
+Type your text here
+Press Ctrl+D when done
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="command-notes">
+                            <h3>Important Notes</h3>
+                            <ul>
+                                <li>Common uses:
+                                    <ul>
+                                        <li>Quick file viewing</li>
+                                        <li>File concatenation</li>
+                                        <li>Creating small text files</li>
+                                        <li>Displaying file contents with numbers</li>
+                                    </ul>
+                                </li>
+                                <li>Best practices:
+                                    <ul>
+                                        <li>Use less for large files</li>
+                                        <li>Redirect output for large combinations</li>
+                                        <li>Check file type before viewing</li>
+                                        <li>Use -A to see hidden characters</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- touch command -->
+                <div class="command-card" id="touch-command">
+                    <div class="command-basic">
+                        <div class="command-icon">
+                            <i class="fas fa-file-medical"></i>
+                        </div>
+                        <h2>touch</h2>
+                        <p class="command-brief">Create empty files or update timestamps</p>
+                        <div class="basic-syntax">
+                            <code>touch [options] file</code>
+                        </div>
+                    </div>
+                    <div class="command-details">
+                        <div class="command-purpose">
+                            <h3>Purpose</h3>
+                            <p>The touch command creates empty files and updates timestamps. It helps you:</p>
+                            <ul>
+                                <li>Create new empty files</li>
+                                <li>Update file access times</li>
+                                <li>Update file modification times</li>
+                                <li>Synchronize timestamps between files</li>
+                            </ul>
+                        </div>
+
+                        <div class="command-usage">
+                            <h3>Common Usage</h3>
+                            <ul>
+                                <li><code>touch -a</code>: Update access time only
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ ls -lu file.txt
+-rw-r--r-- 1 user user 0 Mar 14 10:00 file.txt
+$ touch -a file.txt
+$ ls -lu file.txt
+-rw-r--r-- 1 user user 0 Mar 15 10:30 file.txt
+                            </pre>
+                                        </div>
+                                        <p>Only the access time is updated</p>
+                                    </div>
+                                </li>
+                                <li><code>touch -r</code>: Use reference file
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ touch -r reference.txt target.txt
+$ ls -l reference.txt target.txt
+-rw-r--r-- 1 user user 0 Mar 15 10:30 reference.txt
+-rw-r--r-- 1 user user 0 Mar 15 10:30 target.txt
+                            </pre>
+                                        </div>
+                                        <p>Copies timestamps from reference file</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="practical-examples">
+                            <h3>Practical Examples</h3>
+                            <div class="example-block">
+                                <h4>1. Create multiple files:</h4>
+                                <code>touch file{1..3}.txt</code>
+                                <div class="example-output">
+                                    <pre>
+$ touch file{1..3}.txt
+$ ls -l
+-rw-r--r-- 1 user user 0 Mar 15 10:30 file1.txt
+-rw-r--r-- 1 user user 0 Mar 15 10:30 file2.txt
+-rw-r--r-- 1 user user 0 Mar 15 10:30 file3.txt
+                                    </pre>
+                                </div>
+                            </div>
+
+                            <div class="example-block">
+                                <h4>2. Set specific timestamp:</h4>
+                                <code>touch -t 202403151030.00 file.txt</code>
+                                <div class="example-output">
+                                    <pre>
+$ touch -t 202403151030.00 file.txt
+$ ls -l file.txt
+-rw-r--r-- 1 user user 0 Mar 15 10:30 file.txt
+                                    </pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="command-notes">
+                            <h3>Important Notes</h3>
+                            <ul>
+                                <li>File creation:
+                                    <ul>
+                                        <li>Creates empty files if they don't exist</li>
+                                        <li>Updates timestamps if files exist</li>
+                                        <li>Doesn't modify file content</li>
+                                        <li>Requires write permission in directory</li>
+                                    </ul>
+                                </li>
+                                <li>Best practices:
+                                    <ul>
+                                        <li>Use descriptive file names</li>
+                                        <li>Check file existence first</li>
+                                        <li>Verify timestamp changes</li>
+                                        <li>Consider file permissions</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- grep command -->
+                <div class="command-card" id="grep-command">
+                    <div class="command-basic">
+                        <div class="command-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h2>grep</h2>
+                        <p class="command-brief">Search text patterns in files</p>
+                        <div class="basic-syntax">
+                            <code>grep [options] pattern [file...]</code>
+                        </div>
+                    </div>
+                    <div class="command-details">
+                        <div class="command-purpose">
+                            <h3>Purpose</h3>
+                            <p>The grep command searches for text patterns in files. It helps you:</p>
+                            <ul>
+                                <li>Find specific text in files</li>
+                                <li>Filter command output</li>
+                                <li>Search through multiple files</li>
+                                <li>Count pattern occurrences</li>
+                            </ul>
+                        </div>
+
+                        <div class="command-usage">
+                            <h3>Common Usage</h3>
+                            <ul>
+                                <li><code>grep -i</code>: Case insensitive search
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ grep -i "error" log.txt
+Error: Connection failed
+WARNING: error in line 42
+System ERROR detected
+                            </pre>
+                                        </div>
+                                        <p>Matches text regardless of case</p>
+                                    </div>
+                                </li>
+                                <li><code>grep -r</code>: Recursive search
+                                    <div class="usage-example">
+                                        <div class="example-output">
+                                            <pre>
+$ grep -r "TODO" ./src/
+./src/main.c:// TODO: Implement error handling
+./src/utils.h:/* TODO: Add documentation */
+                            </pre>
+                                        </div>
+                                        <p>Searches in all files under directory</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="practical-examples">
+                            <h3>Practical Examples</h3>
+                            <div class="example-block">
+                                <h4>1. Search with context:</h4>
+                                <code>grep -C 2 "error" log.txt</code>
+                                <div class="example-output">
+                                    <pre>
+System starting
+Initializing...
+Error: Connection failed
+Retrying connection...
+Connection established
+                            </pre>
+                                </div>
+                            </div>
+
+                            <div class="example-block">
+                                <h4>2. Count matches:</h4>
+                                <code>grep -c "error" *.log</code>
+                                <div class="example-output">
+                                    <pre>
+$ grep -c "error" *.log
+app.log:5
+system.log:3
+debug.log:8
+                            </pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="command-notes">
+                            <h3>Important Notes</h3>
+                            <ul>
+                                <li>Search features:
+                                    <ul>
+                                        <li>Supports regular expressions</li>
+                                        <li>Can highlight matches in color</li>
+                                        <li>Works with pipes and redirections</li>
+                                        <li>Handles multiple file types</li>
+                                    </ul>
+                                </li>
+                                <li>Best practices:
+                                    <ul>
+                                        <li>Use -i for case-insensitive search</li>
+                                        <li>Add context with -A, -B, or -C</li>
+                                        <li>Quote patterns with spaces</li>
+                                        <li>Use -w for whole word matches</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About This Guide</h3>
+                    <p>A comprehensive reference for essential Linux file and directory manipulation commands. Created to help both beginners and experienced users.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#ls-command">List Files (ls)</a></li>
+                        <li><a href="#cd-command">Change Directory (cd)</a></li>
+                        <li><a href="#pwd-command">Print Directory (pwd)</a></li>
+                        <li><a href="#grep-command">Search Text (grep)</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="https://www.linux.org/" target="_blank">Linux.org</a></li>
+                        <li><a href="https://www.gnu.org/software/bash/manual/" target="_blank">Bash Manual</a></li>
+                        <li><a href="https://www.kernel.org/" target="_blank">Linux Kernel</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact-section">
+                    <h3>Developer Contact</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-user"></i> Albin Biju P</li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:albinbiju2028@mca.ajce.in">albinbiju2028@mca.ajce.in</a></li>
+                        <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/albin-biju-p-1609762b7" target="_blank">LinkedIn</a></li>
+                    </ul>
+                    <div class="support-section">
+                        <h3>Support This Project</h3>
+                        <div class="support-buttons">
+                            <a href=https://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@github.com/albinbiju2210/Linux.git class="support-button github-button">
+                                <i class="fab fa-github"></i> Contribute on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Albin Biju. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <script>
+        document.querySelectorAll('.command-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.toggle('expanded');
+            });
+        });
+
+        // Highlight active section in navigation
+        const sections = document.querySelectorAll('.command-card');
+        const navLinks = document.querySelectorAll('.nav-list a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
